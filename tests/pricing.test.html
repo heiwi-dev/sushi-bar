@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Проверка расчётов заказа</title>
+  <style>
+    body { font: 15px/1.5 "Segoe UI", system-ui, sans-serif; margin: 32px; color: #1a1815; }
+    pre { background: #f4f1ea; padding: 18px; border-radius: 10px; white-space: pre-wrap; }
+    .ok { color: #2f7a52; } .fail { color: #b42318; }
+  </style>
+</head>
+<body>
+  <h1>Проверка расчётов заказа</h1>
+  <p>Откройте этот файл в браузере. Все проверки должны быть зелёными.</p>
+  <pre id="out">Выполняется…</pre>
+
+  <script src="../js/pricing.js"></script>
+  <script>
+    (function () {
+      var P = window.Pricing;
+      var results = [];
+      var failed = 0;
+
+      function eq(actual, expected, name) {
+        var ok = JSON.stringify(actual) === JSON.stringify(expected);
+        if (!ok) failed++;
+        results.push((ok ? '✓ ' : '✗ ') + name + (ok ? '' : ' — получено ' + JSON.stringify(actual) + ', ожидалось ' + JSON.stringify(expected)));
+      }
+
+      var item = function (price, qty) { return { price: price, qty: qty === undefined ? 1 : qty }; };
+
+      eq(P.subtotal([item(10, 2), item(5.5)]), 25.5, 'сумма позиций');
+      eq(P.subtotal([]), 0, 'пустая корзина');
+      eq(P.subtotal([item(10, 0)]), 0, 'нулевое количество не считается');
+
+      eq(P.discountFor(100, 'SUSHI15').discount, 15, 'SUSHI15 от 100 BYN');
+      eq(P.discountFor(100, 'sushi15').discount, 15, 'промокод без учёта регистра');
+      eq(P.discountFor(59.99, 'SUSHI15').applied, false, 'SUSHI15 ниже порога не применяется');
+      eq(P.discountFor(60, 'SUSHI15').discount, 9, 'SUSHI15 ровно от 60 BYN');
+      eq(P.discountFor(40, 'FREE5').discount, 5, 'FREE5 от 40 BYN');
+      eq(P.discountFor(39.99, 'FREE5').applied, false, 'FREE5 ниже порога не применяется');
+      eq(P.discountFor(100, 'NOPE').applied, false, 'неизвестный промокод');
+
+      eq(P.discountFor(100, '', true).discount, 10, 'скидка на первый заказ 10%');
+      eq(P.discountFor(100, 'SUSHI15', true).discount, 15, 'промокод важнее скидки на первый заказ');
+      eq(P.discountFor(100, '', false).discount, 0, 'без промокода и не первый заказ — 0');
+      eq(P.discountFor(100, 'FIRST10', true).discount, 10, 'FIRST10 на первый заказ');
+      eq(P.discountFor(100, 'FIRST10', false).applied, false, 'FIRST10 не работает не на первый заказ');
+      eq(P.discountFor(100, 'first10', false).discount, 0, 'FIRST10 в нижнем регистре не обходит условие');
+
+      eq(P.deliveryFee('delivery', 49.99).fee, 5, 'доставка ниже порога — 5 BYN');
+      eq(P.deliveryFee('delivery', 50).fee, 0, 'доставка от 50 BYN бесплатна');
+      eq(P.deliveryFee('pickup', 10).fee, 0, 'самовывоз бесплатный');
+
+      var t = P.totals([item(45)], { promo: 'FREE5', method: 'delivery' });
+      eq([t.subtotal, t.discount, t.afterDiscount, t.delivery, t.total], [45, 5, 40, 5, 45], 'итог заказа 45 BYN с FREE5');
+
+      eq(P.totals([item(19.99)]).canOrder, false, 'минимальный заказ не достигнут');
+      eq(P.totals([item(20)]).canOrder, true, 'минимальный заказ 20 BYN');
+      eq(P.totals([item(50)], { method: 'pickup' }).total, 50, 'самовывоз: без доставки');
+      eq(P.totals([item(60)], { promo: 'SUSHI15' }).delivery, 0, 'после скидки доставка бесплатна');
+
+      eq(P.formatMoney(51.75), '51,75 BYN', 'формат цены');
+
+      var out = document.getElementById('out');
+      out.className = failed ? 'fail' : 'ok';
+      out.textContent = results.join('\n') + '\n\n' + (failed ? 'Ошибок: ' + failed : 'Все проверки пройдены');
+      document.title = (failed ? 'ОШИБКИ: ' : 'OK: ') + 'расчёты заказа';
+    })();
+  </script>
+</body>
+</html>

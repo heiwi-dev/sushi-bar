@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Суши-бар «Кабуки» — доставка суши и роллов в Минске</title>
+  <meta name="description" content="Суши-бар «Кабуки»: сеты, роллы, суши и гунканы, горячее и напитки. Доставка 60–90 минут, бесплатно от 50 BYN, самовывоз. Акции и промокоды.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23c2452d'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='32' fill='%23fff' text-anchor='middle'%3E寿%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="top">
+  <a class="skip-link" href="#menu">Перейти к меню</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark" aria-hidden="true">寿</span>
+        <span class="logo-text">
+          <span class="logo-name">Кабуки</span>
+          <span class="logo-sub">суши-бар</span>
+        </span>
+      </a>
+
+      <nav class="nav" id="siteNav" aria-label="Основная навигация">
+        <a href="#menu">Меню</a>
+        <a href="#promo">Акции</a>
+        <a href="#delivery">Доставка</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav">Меню</button>
+        <button class="cart-btn" id="openCart" type="button">
+          Корзина <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <span class="eyebrow">Доставка по Минску</span>
+          <h1>Свежие суши<br>и роллы ручной работы</h1>
+          <p class="hero-lead">Готовим после заказа: рис, рыба и овощи — без заморозки. Сеты на компанию, роллы поштучно и горячее в одном заказе.</p>
+          <div class="hero-actions">
+            <a class="btn btn--primary" href="#menu">Выбрать блюда</a>
+            <a class="btn btn--ghost" href="#promo">Акции и скидки</a>
+          </div>
+          <ul class="hero-facts">
+            <li>Доставка 60–90 минут</li>
+            <li>Бесплатно от 50 BYN</li>
+            <li>Самовывоз без наценки</li>
+          </ul>
+        </div>
+        <div class="hero-media">
+          <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1100&q=75"
+               alt="Ассорти роллов на доске" width="1100" height="940" fetchpriority="high">
+          <span class="hero-tag">Сет дня «Сакура» — 32,00 BYN</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promo -->
+    <section class="section section--tight" id="promo">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Акции и скидки</h2>
+            <p>Все условия указаны рядом с предложением. Скидки не суммируются, если не указано иное.</p>
+          </div>
+        </div>
+        <div class="promos-grid" id="promos"></div>
+      </div>
+    </section>
+
+    <!-- Catalog -->
+    <section class="section" id="menu">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Меню</h2>
+            <p>Цены указаны в белорусских рублях. Вес и состав — на карточке блюда.</p>
+          </div>
+        </div>
+
+        <div class="catalog-tools">
+          <label class="search">
+            <span class="sr-only">Поиск по меню</span>
+            <input type="search" id="search" placeholder="Найти блюдо: филадельфия, рамен, матча…" autocomplete="off">
+          </label>
+          <div class="chips" id="categories" role="group" aria-label="Категории меню"></div>
+        </div>
+
+        <div class="chips chips--tags" id="tags" role="group" aria-label="Фильтры по особенностям"></div>
+
+        <p class="result-count" id="resultCount" aria-live="polite"></p>
+
+        <div class="grid" id="catalog"></div>
+        <p class="empty" id="empty" hidden>По вашему запросу ничего не нашлось. Попробуйте изменить фильтры или поиск.</p>
+
+        <noscript>
+          <p class="form-note" style="margin-top:16px">Для корзины, фильтров и оформления заказа включите JavaScript в браузере.</p>
+        </noscript>
+      </div>
+    </section>
+
+    <!-- Delivery -->
+    <section class="section" id="delivery">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Доставка и оплата</h2>
+            <p>Условия действуют на всей зоне доставки, если не указано иное.</p>
+          </div>
+        </div>
+        <div class="info-grid">
+          <article class="info-card">
+            <h3>Доставка курьером</h3>
+            <ul>
+              <li><strong>60–90 минут</strong> с момента подтверждения заказа</li>
+              <li>Стоимость — <strong>5,00 BYN</strong></li>
+              <li>Бесплатно при заказе <strong>от 50,00 BYN</strong> после скидки</li>
+              <li>Минимальный заказ — <strong>20,00 BYN</strong></li>
+              <li>Зона: <span class="placeholder">[ЗАПОЛНИТЬ: районы и улицы доставки]</span></li>
+            </ul>
+          </article>
+          <article class="info-card">
+            <h3>Самовывоз</h3>
+            <ul>
+              <li>Адрес: <span class="placeholder">[ЗАПОЛНИТЬ: адрес пункта самовывоза]</span></li>
+              <li>Сборка заказа — <strong>20–30 минут</strong></li>
+              <li>Стоимость самовывоза — <strong>0,00 BYN</strong></li>
+              <li>Режим работы: <span class="placeholder">[ЗАПОЛНИТЬ: часы работы]</span></li>
+            </ul>
+          </article>
+          <article class="info-card">
+            <h3>Оплата и возврат</h3>
+            <ul>
+              <li>Картой или наличными <strong>при получении</strong></li>
+              <li>Онлайн-оплата: <span class="placeholder">[ЗАПОЛНИТЬ: платёжный сервис или «не подключена»]</span></li>
+              <li>Возврат и обмен — по <a href="legal.html#offer">публичному договору</a> и законодательству РБ</li>
+              <li>Образец кассового чека — <a href="legal.html#receipt">в разделе документов</a></li>
+              <li>Порядок обращений и книга замечаний — <a href="legal.html#consumer">информация для потребителя</a></li>
+              <li>Вопросы по заказу: <a href="tel:+375290000000" data-company="phoneHref" data-company-text="phone">+375 (29) 000-00-00</a></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Subscribe + feedback -->
+    <section class="section" id="contacts">
+      <div class="wrap split">
+        <div class="subscribe-box">
+          <h2>Акции на почту</h2>
+          <p>Присылаем новые сеты, скидки и промокоды. Не чаще двух писем в месяц.</p>
+          <form id="subscribeForm" novalidate>
+            <div class="form-grid">
+              <div class="field field--full">
+                <label for="subscribeEmail">E-mail</label>
+                <input type="email" id="subscribeEmail" name="email" placeholder="you@example.by" autocomplete="email" inputmode="email">
+                <p class="field-error" id="errSubscribeEmail" aria-live="polite"></p>
+              </div>
+              <div class="field field--full">
+                <label class="consent" for="subscribeConsent">
+                  <input type="checkbox" id="subscribeConsent" name="consent">
+                  <span>Согласен на обработку персональных данных для направления акций и специальных предложений (в том числе рекламы по e-mail) в соответствии с <a href="legal.html#consent" target="_blank" rel="noopener">Согласием на обработку персональных данных</a> и <a href="legal.html#privacy" target="_blank" rel="noopener">Политикой обработки персональных данных</a>.</span>
+                </label>
+                <p class="field-error consent-error" id="errSubscribeConsent" aria-live="polite"></p>
+              </div>
+            </div>
+            <button class="btn btn--dark" type="submit" style="margin-top:14px">Подписаться</button>
+            <p class="form-success" id="subscribeSuccess" hidden role="status">Готово: письмо с подтверждением подписки отправлено. Отписаться можно в любом письме.</p>
+          </form>
+        </div>
+
+        <div class="contact-box">
+          <h2>Связаться с нами</h2>
+          <p>Вопрос по заказу, брони или качеству блюд — напишите, ответим в течение рабочего дня.</p>
+          <form id="feedbackForm" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="feedbackName">Имя</label>
+                <input type="text" id="feedbackName" name="name" placeholder="Как к вам обращаться" autocomplete="name">
+                <p class="field-error" id="errFeedbackName" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="feedbackContact">Телефон или e-mail</label>
+                <input type="text" id="feedbackContact" name="contact" placeholder="+375 (29) 000-00-00" autocomplete="tel">
+                <p class="field-error" id="errFeedbackContact" aria-live="polite"></p>
+              </div>
+              <div class="field field--full">
+                <label for="feedbackMessage">Сообщение</label>
+                <textarea id="feedbackMessage" name="message" placeholder="Опишите вопрос: номер заказа, дата, что случилось"></textarea>
+                <p class="field-error" id="errFeedbackMessage" aria-live="polite"></p>
+              </div>
+              <div class="field field--full">
+                <label class="consent" for="feedbackConsent">
+                  <input type="checkbox" id="feedbackConsent" name="consent">
+                  <span>Согласен на обработку персональных данных для рассмотрения обращения и ответа в соответствии с <a href="legal.html#consent" target="_blank" rel="noopener">Согласием на обработку персональных данных</a> и <a href="legal.html#privacy" target="_blank" rel="noopener">Политикой обработки персональных данных</a>.</span>
+                </label>
+                <p class="field-error consent-error" id="errFeedbackConsent" aria-live="polite"></p>
+              </div>
+            </div>
+            <button class="btn btn--primary" type="submit" style="margin-top:14px">Отправить</button>
+            <p class="form-success" id="feedbackSuccess" hidden role="status">Сообщение отправлено. Мы ответим по указанному контакту.</p>
+          </form>
+
+          <dl class="requisites" style="margin-top:24px">
+            <div><dt>Наименование</dt><dd data-company="legalName">[ЗАПОЛНИТЬ: полное наименование]</dd></div>
+            <div><dt>УНП</dt><dd data-company="unp">[ЗАПОЛНИТЬ: УНП]</dd></div>
+            <div><dt>Адрес</dt><dd data-company="address">[ЗАПОЛНИТЬ: юридический адрес]</dd></div>
+            <div><dt>Регистрация</dt><dd data-company="registration">[ЗАПОЛНИТЬ: сведения о государственной регистрации]</dd></div>
+            <div><dt>Торговый реестр</dt><dd data-company="tradeRegister">[ЗАПОЛНИТЬ: дата включения в Торговый реестр и регистрационный номер]</dd></div>
+            <div><dt>Режим работы</dt><dd data-company="hours">Ежедневно 11:00–23:00</dd></div>
+            <div><dt>Телефон</dt><dd><a href="tel:+375290000000" data-company="phoneHref" data-company-text="phone">+375 (29) 000-00-00</a></dd></div>
+            <div><dt>E-mail</dt><dd><a href="mailto:hello@example.by" data-company="emailHref" data-company-text="email">hello@example.by</a></dd></div>
+            <div><dt>Обращения покупателей</dt><dd data-company="complaintsPerson">[ЗАПОЛНИТЬ: лицо, уполномоченное рассматривать обращения]</dd></div>
+            <div><dt>Исполком по месту регистрации</dt><dd data-company="executiveCommittee">[ЗАПОЛНИТЬ: телефоны исполкома]</dd></div>
+            <div><dt>Книга замечаний и предложений</dt><dd data-company="complaintBook">[ЗАПОЛНИТЬ: место нахождения книги]</dd></div>
+            <div><dt>Порядок обращений</dt><dd><a href="legal.html#consumer">Информация для потребителя</a> · <a href="#feedbackForm">электронная форма обращения</a></dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo-name">Кабуки</span>
+          <p>Суши-бар и доставка суши, роллов и горячего в Минске. Готовим после заказа.</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Меню</h3>
+          <ul>
+            <li><a href="#menu">Все блюда</a></li>
+            <li><a href="#promo">Акции</a></li>
+            <li><a href="#delivery">Доставка и оплата</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Документы</h3>
+          <ul>
+            <li><a href="legal.html#privacy">Политика обработки персональных данных</a></li>
+            <li><a href="legal.html#cookies">Политика использования cookie</a></li>
+            <li><a href="legal.html#offer">Публичный договор (условия заказа)</a></li>
+            <li><a href="legal.html#consent">Согласие на обработку персональных данных</a></li>
+            <li><a href="legal.html#consumer">Информация для потребителя, обращения</a></li>
+            <li><a href="legal.html#receipt">Образец кассового чека</a></li>
+            <li><a href="legal.html#requisites">Реквизиты продавца</a></li>
+            <li><button class="cookie-settings-link" id="cookieSettingsFooter" type="button">Настройки cookie</button></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-col--requisites">
+          <h3>Реквизиты</h3>
+          <div class="footer-meta">
+            <span data-company="legalName">[ЗАПОЛНИТЬ: полное наименование]</span>
+            <span>УНП: <span data-company="unp">[ЗАПОЛНИТЬ: УНП]</span></span>
+            <span data-company="address">[ЗАПОЛНИТЬ: юридический адрес]</span>
+            <span>Регистрация: <span data-company="registration">[ЗАПОЛНИТЬ: сведения о регистрации]</span></span>
+            <span>Торговый реестр: <span data-company="tradeRegister">[ЗАПОЛНИТЬ: дата и номер]</span></span>
+            <span>Режим работы: <span data-company="hours">Ежедневно 11:00–23:00</span></span>
+            <a href="tel:+375290000000" data-company="phoneHref" data-company-text="phone">+375 (29) 000-00-00</a>
+            <a href="mailto:hello@example.by" data-company="emailHref" data-company-text="email">hello@example.by</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year">2026</span> Суши-бар «Кабуки». Цены указаны в белорусских рублях. Изображения блюд могут отличаться от фактических.</p>
+        <p>
+          Хостинг: <span class="placeholder" data-company="hosting">[ЗАПОЛНИТЬ: хостинг-провайдер в РБ]</span>.
+          Реестр РУП «БелГИЭ»: <span class="placeholder" data-company="belgiez">[ЗАПОЛНИТЬ: номер и дата]</span>.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart -->
+  <dialog id="cartDialog" class="drawer" aria-labelledby="cartTitle">
+    <div class="dialog-head">
+      <h2 id="cartTitle">Корзина</h2>
+      <button class="dialog-close" type="button" data-close aria-label="Закрыть корзину">×</button>
+    </div>
+    <div class="drawer-body" id="cartItems"></div>
+    <div class="drawer-foot" id="cartFoot">
+      <div class="promo-row">
+        <label class="sr-only" for="promoInput">Промокод</label>
+        <input type="text" id="promoInput" placeholder="Промокод" autocomplete="off">
+        <button class="btn btn--ghost btn--sm" id="promoApply" type="button">Применить</button>
+      </div>
+      <p class="promo-message" id="promoMessage" aria-live="polite"></p>
+      <div class="summary-row"><span>Блюда</span><span id="cartSubtotal">0,00 BYN</span></div>
+      <div class="summary-row summary-row--discount" id="cartDiscountRow" hidden>
+        <span>Скидка</span><span id="cartDiscount">0,00 BYN</span>
+      </div>
+      <div class="summary-row"><span>Доставка</span><span id="cartDelivery">от 5,00 BYN</span></div>
+      <div class="summary-row summary-row--total"><span>Итого</span><span id="cartTotal">0,00 BYN</span></div>
+      <button class="btn btn--primary btn--block" id="checkoutBtn" type="button">Перейти к оформлению</button>
+      <p class="form-note">Стоимость доставки рассчитывается при оформлении. Минимальный заказ — 20,00 BYN.</p>
+    </div>
+  </dialog>
+
+  <!-- Checkout -->
+  <dialog id="checkoutDialog" class="modal modal--wide" aria-labelledby="checkoutTitle">
+    <div class="dialog-head">
+      <h2 id="checkoutTitle">Оформление заказа</h2>
+      <button class="dialog-close" type="button" data-close aria-label="Закрыть оформление">×</button>
+    </div>
+    <form id="checkoutForm" novalidate>
+      <div class="modal-body">
+        <div class="checkout-grid">
+          <div class="form-grid">
+            <div class="field">
+              <label for="orderName">Имя *</label>
+              <input type="text" id="orderName" name="name" placeholder="Иван" autocomplete="name">
+              <p class="field-error" id="errName" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="orderPhone">Телефон *</label>
+              <input type="tel" id="orderPhone" name="phone" placeholder="+375 (29) 000-00-00" autocomplete="tel" inputmode="tel">
+              <p class="field-error" id="errPhone" aria-live="polite"></p>
+            </div>
+            <div class="field field--full">
+              <label for="orderEmail">E-mail</label>
+              <input type="email" id="orderEmail" name="email" placeholder="you@example.by" autocomplete="email" inputmode="email">
+              <p class="field-error" id="errEmail" aria-live="polite"></p>
+            </div>
+
+            <div class="field field--full">
+              <span class="field-label">Способ получения *</span>
+              <div class="radio-row">
+                <label><input type="radio" name="method" value="delivery" checked> Доставка курьером</label>
+                <label><input type="radio" name="method" value="pickup"> Самовывоз</label>
+              </div>
+            </div>
+
+            <div class="field field--full" id="addressField">
+              <label for="orderAddress">Адрес доставки *</label>
+              <input type="text" id="orderAddress" name="address" placeholder="Улица, дом, квартира, подъезд" autocomplete="street-address">
+              <p class="field-error" id="errAddress" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="orderTime">Время</label>
+              <select id="orderTime" name="time">
+                <option value="asap">Как можно скорее</option>
+                <option value="12-14">12:00–14:00</option>
+                <option value="14-16">14:00–16:00</option>
+                <option value="16-18">16:00–18:00</option>
+                <option value="18-20">18:00–20:00</option>
+                <option value="20-22">20:00–22:00</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="orderPayment">Оплата</label>
+              <select id="orderPayment" name="payment">
+                <option value="card-on-delivery">Картой при получении</option>
+                <option value="cash">Наличными при получении</option>
+              </select>
+            </div>
+
+            <div class="field field--full">
+              <label for="orderComment">Комментарий</label>
+              <textarea id="orderComment" name="comment" placeholder="Домофон, этаж, пожелания к заказу"></textarea>
+            </div>
+
+            <p class="form-note field--full">
+              Онлайн-оплата: <span class="placeholder">[ЗАПОЛНИТЬ: платёжный сервис или «не подключена»]</span>.
+              Оплата при получении доступна всегда.
+            </p>
+          </div>
+
+          <aside class="checkout-summary" aria-label="Сумма заказа">
+            <div class="summary-row"><span>Блюда</span><span id="sumSubtotal">0,00 BYN</span></div>
+            <div class="summary-row summary-row--discount" id="sumDiscountRow" hidden>
+              <span>Скидка</span><span id="sumDiscount">0,00 BYN</span>
+            </div>
+            <div class="summary-row"><span>Доставка</span><span id="sumDelivery">5,00 BYN</span></div>
+            <div class="checkout-total"><span>Итого</span><span id="sumTotal">0,00 BYN</span></div>
+            <p class="form-note" id="sumDeliveryNote">Доставка бесплатно от 50,00 BYN после скидки.</p>
+            <p class="form-note" id="sumMinNote" hidden>Минимальный заказ — 20,00 BYN.</p>
+          </aside>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <label class="consent" for="orderConsent">
+          <input type="checkbox" id="orderConsent" name="consent">
+          <span>Согласен на обработку персональных данных для оформления, оплаты и доставки заказа в соответствии с <a href="legal.html#consent" target="_blank" rel="noopener">Согласием на обработку персональных данных</a> и <a href="legal.html#privacy" target="_blank" rel="noopener">Политикой обработки персональных данных</a>.</span>
+        </label>
+        <p class="field-error consent-error" id="errConsent" aria-live="polite"></p>
+        <button class="btn btn--primary btn--block" id="placeOrderBtn" type="submit">Оформить заказ</button>
+        <p class="form-note">Условия заказа, оплаты, доставки и возврата — в <a href="legal.html#offer" target="_blank" rel="noopener">публичном договоре</a>.</p>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Success -->
+  <dialog id="successDialog" class="modal modal--sm" aria-labelledby="successTitle">
+    <div class="dialog-head">
+      <h2 id="successTitle">Заказ принят</h2>
+      <button class="dialog-close" type="button" data-close aria-label="Закрыть">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="success-icon" aria-hidden="true">✓</div>
+      <p>Номер заказа: <strong id="successNumber">—</strong></p>
+      <p>Сумма: <strong id="successTotal">—</strong></p>
+      <p id="successMethod">—</p>
+      <p class="form-note" style="margin-top:12px">Мы позвоним по указанному номеру для подтверждения. Если заказ не подтверждён в течение 15 минут, свяжитесь с нами по телефону.</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn--dark btn--block" type="button" data-close>Понятно</button>
+    </div>
+  </dialog>
+
+  <!-- Cookie settings -->
+  <dialog id="cookieDialog" class="modal modal--sm" aria-labelledby="cookieTitle">
+    <div class="dialog-head">
+      <h2 id="cookieTitle">Настройки cookie</h2>
+      <button class="dialog-close" type="button" data-close aria-label="Закрыть настройки cookie">×</button>
+    </div>
+    <div class="modal-body">
+      <p class="form-note" style="margin-bottom:16px">Обязательные cookie нужны для работы сайта и не требуют согласия. Аналитические и маркетинговые подключаются только с вашего разрешения.</p>
+      <div class="cookie-options">
+        <label class="cookie-option">
+          <input type="checkbox" checked disabled>
+          <span><strong>Обязательные</strong><span>Корзина, выбранный способ получения, сохранение настроек. Всегда включены.</span></span>
+        </label>
+        <label class="cookie-option">
+          <input type="checkbox" id="cookieAnalytics">
+          <span><strong>Аналитические</strong><span>Обезличенная статистика посещений. Помогает улучшать меню и сайт.</span></span>
+        </label>
+        <label class="cookie-option">
+          <input type="checkbox" id="cookieMarketing">
+          <span><strong>Маркетинговые</strong><span>Рекламные пиксели и повторные показы. Сейчас не подключены.</span></span>
+        </label>
+      </div>
+      <p class="form-note" style="margin-top:14px">Отозвать согласие можно в любой момент, сняв отметки и сохранив настройки. Подробнее — <a href="legal.html#cookies" target="_blank" rel="noopener">Политика использования cookie</a>.</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn--dark btn--block" id="cookieSave" type="button">Сохранить настройки</button>
+      <button class="btn btn--ghost btn--block" id="cookieRejectAll" type="button">Отклонить необязательные</button>
+    </div>
+  </dialog>
+
+  <!-- Cookie banner -->
+  <aside class="cookie-banner" id="cookieBanner" aria-label="Согласие на использование cookie" hidden>
+    <p>
+      Мы используем обязательные cookie для работы сайта и, с вашего согласия, аналитические и маркетинговые.
+      Подробнее — <a href="legal.html#cookies">Политика использования cookie</a>.
+    </p>
+    <div class="cookie-banner__actions">
+      <button class="btn" id="cookieAcceptAll" type="button">Принять все</button>
+      <button class="btn" id="cookieRejectOptional" type="button">Отклонить необязательные</button>
+      <button class="btn" id="cookieCustomize" type="button">Настроить</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/pricing.js"></script>
+  <script src="js/company.js"></script>
+  <script src="js/consent.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/effects.js"></script>
+</body>
+</html>
